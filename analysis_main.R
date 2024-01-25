@@ -19,31 +19,32 @@ stroop_data_incong <- stroop_data %>%
 #write stan data separate for each conditon
 #congruent data
 stan_data_cong <- list(
-  N <- nrow(stroop_data_cong),
-  rt <- stroop_data_cong$rt,
-  resp <- stroop_data_cong$accuracy,
+  N = length(stroop_data_cong$rt),
+  rt = stroop_data_cong$rt,
+  resp = stroop_data_cong$accuracy
   #cond <- stroop_data$congruency,
-  id <- stroop_data_cong$subject
+  #id <- stroop_data_cong$subject
 )
 
 #incongruent data
 stan_data_incong <- list(
-  N <- nrow(stroop_data_incong),
-  rt <- stroop_data_incong$rt,
-  resp <- stroop_data_incong$accuracy,
+  N = nrow(stroop_data_incong),
+  rt = stroop_data_incong$rt,
+  resp = stroop_data_incong$accuracy,
   #cond <- stroop_data$congruency,
-  id <- stroop_data_incong$subject
+  #id <- stroop_data_incong$subject
 )
 
 #fit models, separately for each condition
 #congruent model
-fit_cong = stan(
-  file = "four_parameter_dm",
-  data = stan_data_cong)
+fit_cong <- stan(
+  file = "four_parameter_dm.stan",
+  data = stan_data_cong,
+  chains = 1)
 
 #incongruent model
 fit_incong <- stan(
-  file = "four_parameter_dm",
+  file = "four_parameter_dm.stan",
   data = stan_data_incong
 )
 
