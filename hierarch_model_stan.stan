@@ -2,21 +2,21 @@ data {
   int<lower=0> N;                       // No trials
   int<lower=0> Nsubj;                  // No subjects
   int<lower=1> Nconds;// No conditions
-  array[N] real rt;                     // response times (seconds)
-  array[N] int<lower=0, upper=1> decision;  // responses (0,1)
-  array[N] int<lower=1, upper=Nconds> cnd; //condition
-  array[N] int<lower=1, upper=Nsubj> subj;  // subject index
+  vector[N] real rt;                     // response times (seconds)
+  vector[N] int<lower=0, upper=1> decision;  // responses (0,1)
+  vector[N] int<lower=1, upper=Nconds> cnd; //condition
+  vector[N] int<lower=1, upper=Nsubj> subj;  // subject index
    // matrix<lower=0>[Nconds, Nsubj] min_rt_subj_cond;
 }
 
 parameters {
   // group parameters
-  array[Nconds] real<lower=0> mu_a;  // boundary separation: group mean
-  array[Nconds] real<lower=0> sigma_a;  // boundary separation: group sd
-  array[Nconds] real mu_v;  // mean drift for each condition type: group mean
-  array[Nconds] real<lower=0> sigma_v;  // mean drift for each condition type: sd
-  array[Nconds] real<lower=0> mu_t0;  // non-decision time (lower bound): group mean
-  array[Nconds] real<lower=0> sigma_t0;  // non-decision time (lower bound): sd
+  vector[Nconds] real<lower=0> mu_a;  // boundary separation: group mean
+  vector[Nconds] real<lower=0> sigma_a;  // boundary separation: group sd
+  vector[Nconds] real mu_v;  // mean drift for each condition type: group mean
+  vector[Nconds] real<lower=0> sigma_v;  // mean drift for each condition type: sd
+  vector[Nconds] real<lower=0> mu_t0;  // non-decision time (lower bound): group mean
+  vector[Nconds] real<lower=0> sigma_t0;  // non-decision time (lower bound): sd
 
   // parameters for each subject
   array[Nconds, Nsubj] real v;

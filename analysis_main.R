@@ -66,7 +66,10 @@ fit_cong <- stan(
 #incongruent model
 fit_incong <- stan(
   file = "four_parameter_dm.stan",
-  data = stan_data_incong
-)
+  data = stan_data_incong,
+  init = get_initial_values(n_chains),
+  chains = n_chains
+  )
 
-
+save(fit_cong, file = "fit_congruent.rds")
+save(fit_incong, file = "fit_incongruent.rds")
