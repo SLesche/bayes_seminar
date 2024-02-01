@@ -73,3 +73,15 @@ fit_incong <- stan(
 
 save(fit_cong, file = "fit_congruent.rds")
 save(fit_incong, file = "fit_incongruent.rds")
+load("fit_congruent.rds")
+load("fit_incongruent.rds")
+
+plot(fit_cong, plotfun="trace", inc_warmup=TRUE)
+plot(fit_incong, plotfun="trace", inc_warmup=TRUE)
+
+plot(fit_cong, show_density = TRUE)
+plot(fit_incong, show_density = TRUE)
+
+posterior_cong <- posterior::as_draws_df(fit_cong)
+posterior_incong <- posterior::as_draws_df(fit_incong)
+pred_cong <- predict(fit_cong, summary = FALSE, negative_rt = TRUE, ndraws = 500)
